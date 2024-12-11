@@ -6,7 +6,8 @@ package assignments.ex1;
  * In general, we will use Strings as numbers over basis of binary till Hexa.
  * [2-16], 10-16 are represented by A,B,..G.
  * The general representation of the numbers is as a String with the following format:
- * <number><b><base> e.g., “135bA” (i.e., “135”, as 10 is the default base), “100111b2”, “12345b6”,”012b5”, “123bG”, “EFbG”.
+ * <number><b><base> e.g., “135bA” (i.e., “135”, as 10 is the default base),
+ * “100111b2”, “12345b6”,”012b5”, “123bG”, “EFbG”.
  * The following are NOT in the format (not a valid number):
  * “b2”, “0b1”, “123b”, “1234b11”, “3b3”, “-3b5”, “3 b4”, “GbG”, "", null,
  * You should implement the following static functions:
@@ -18,12 +19,60 @@ public class Ex1 {
      * @param num a String representing a number in basis [2,16]
      * @return
      */
+
     public static int number2Int(String num) {
         int ans = -1;
-        // add your code here1111
+        int i = 0;
+        StringBuilder str = new StringBuilder();
+        for (char c : num.toCharArray()){
+            if (c >= '0' && c <= '9') {
+                str.insert(i, c);
+                i = i + 1;
+            }
+            else if ((letterToNumber(c) >= 10 && letterToNumber(c) <= 16)) {
+                str.insert(i, letterToNumber(c));
+                i = i + 2;
+            }
 
-        ////////////////////
+        }
+        ans = Integer.parseInt(String.valueOf(str));
         return ans;
+    }
+    public static int basis(String num) {
+        String[] arra = num.split("b");
+        return number2Int(arra[1]);
+    }
+    public static int letterToNumber(char letter) {
+        switch (letter) {
+            case 'A':
+                return 10;
+            case 'B':
+                return 11;
+            case 'C':
+                return 12;
+            case 'D':
+                return 13;
+            case 'E':
+                return 14;
+            case 'F':
+                return 15;
+            case 'G':
+                return 16;
+            default:
+                // Return -1 for invalid input
+                return -1;
+        }
+    }
+    public static boolean isNumericArray(String str) {
+        if (str == null)
+            return false;
+        if (str.isEmpty())
+            return false;
+        for (char c : str.toCharArray())
+            if ((c < '0' || c > '9') && (c < 'A' || c > 'G') || String.valueOf('c').isEmpty() ) {
+                return false;
+            }
+        return true;
     }
     /**
      * This static function checks if the given String (g) is in a valid "number" format.
@@ -32,9 +81,34 @@ public class Ex1 {
      */
     public static boolean isNumber(String a) {
         boolean ans = true;
-        // add your code here
-
-        ////////////////////
+        int sumb=0;
+        for (int i = 0; i < a.length(); i++) {
+            if(a.charAt(i) == 'b'){
+                sumb=sumb+1;
+            }
+        }
+        if(sumb!=1 && sumb!=0){
+            ans = false;
+        }
+        if(sumb==0 && !isNumericArray(a)){
+            ans = false;
+        }
+        String[] arra = a.split("b");
+        if(arra.length ==2){
+            if(!isNumericArray(arra[0]) || !isNumericArray(arra[1])) {
+                ans = false;
+            }
+        }
+        if(arra.length == 2 && isNumericArray(arra[0]) && isNumericArray(arra[1])) {
+            if (basis(a) >= number2Int(arra[1])) {
+                ans = false;
+            }
+        }
+        else if(arra.length == 1 && isNumericArray(arra[0])){
+            if(number2Int(arra[0]) > 9){
+                ans = false;
+            }
+        }
         return ans;
     }
 
