@@ -38,9 +38,19 @@ public class Ex1 {
         ans = Integer.parseInt(String.valueOf(str));
         return ans;
     }
-    public static int basis(String num) {
-        String[] arra = num.split("b");
+    public static int basis(String a) {
+        String[] arra = a.split("b");
         return number2Int(arra[1]);
+    }
+    public static int max(String a) {
+        int max = -1;
+        String[] arra = a.split("b");
+        for (int i = 0; i < arra[0].length(); i++) {
+            if(number2Int(String.valueOf(arra[0].charAt(i))) > max){
+                max = number2Int(String.valueOf(arra[0].charAt(i)));
+            }
+        }
+        return max;
     }
     public static int letterToNumber(char letter) {
         switch (letter) {
@@ -100,7 +110,7 @@ public class Ex1 {
             }
         }
         if(arra.length == 2 && isNumericArray(arra[0]) && isNumericArray(arra[1])) {
-            if (basis(a) >= number2Int(arra[1])) {
+            if (basis(a) <= max(a)) {
                 ans = false;
             }
         }

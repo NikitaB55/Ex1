@@ -23,7 +23,7 @@ public class Ex1Test {
 
     @Test
     void isBasisNumberTest() {
-        String[] good = {"123bA"};
+        String[] good = {"1", "1b2", "01b2", "123bA", "ABbG", "0bA"};
         for(int i=0;i<good.length;i=i+1) {
             boolean ok = assignments.ex1.Ex1.isNumber(good[i]);
             assertTrue(ok);
