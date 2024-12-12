@@ -36,7 +36,7 @@ public class Ex1Test {
     }
     @Test
     void int2NumberTest() {
-        // implement this testt
+        // implement this testtt
     }
     @Test
     void maxIndexTest() {
