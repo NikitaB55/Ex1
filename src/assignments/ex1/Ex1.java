@@ -22,20 +22,18 @@ public class Ex1 {
 
     public static int number2Int(String num) {
         int ans = -1;
-        int i = 0;
-        StringBuilder str = new StringBuilder();
-        for (char c : num.toCharArray()){
-            if (c >= '0' && c <= '9') {
-                str.insert(i, c);
-                i = i + 1;
+        if (isNumber(num)) {
+            String[] arra = num.split("b");
+            for (char c : arra[1].toCharArray()) {
+                if (c >= '0' && c <= '9') {
+                    ans = Integer.parseInt(Integer.toString(Integer.parseInt(arra[0], Integer.parseInt(arra[1])), 10));
+                    break;
+                } else if ((letterToNumber(c) >= 10 && letterToNumber(c) <= 16)) {
+                    ans = Integer.parseInt(Integer.toString(Integer.parseInt(arra[0], letterToNumber(arra[1].charAt(0))), 10));
+                    break;
+                }
             }
-            else if ((letterToNumber(c) >= 10 && letterToNumber(c) <= 16)) {
-                str.insert(i, letterToNumber(c));
-                i = i + 2;
-            }
-
         }
-        ans = Integer.parseInt(String.valueOf(str));
         return ans;
     }
     public static int basis(String a) {
@@ -71,6 +69,27 @@ public class Ex1 {
             default:
                 // Return -1 for invalid input
                 return -1;
+        }
+    }
+    public static char numberToLetter(int num) {
+        switch (num) {
+            case 10:
+                return 'A';
+            case 11:
+                return 'B';
+            case 12:
+                return 'C';
+            case 13:
+                return 'D';
+            case 14:
+                return 'E';
+            case 15:
+                return 'F';
+            case 16:
+                return 'G';
+            default:
+                // Return X for invalid input
+                return 'X';
         }
     }
     public static boolean isNumericArray(String str) {
@@ -110,7 +129,7 @@ public class Ex1 {
             }
         }
         if(arra.length == 2 && isNumericArray(arra[0]) && isNumericArray(arra[1])) {
-            if (basis(a) <= max(a)) {
+            if ((basis(a) <= max(a)) || (basis(a)<=1 || basis(a)>=17)) {
                 ans = false;
             }
         }
@@ -132,9 +151,22 @@ public class Ex1 {
      */
     public static String int2Number(int num, int base) {
         String ans = "";
-        // add your code here
-
-        ////////////////////
+        int i = 0;
+        StringBuilder str = new StringBuilder();
+        if((base>16 || base<2) || num<0){
+            ans = "";
+            }
+        else{
+            Integer.toString(Integer.parseInt(String.valueOf(num), 10), base);
+            str.insert(0, num);
+            str.insert(String.valueOf(num).length()-1, 'b');
+            if(base<=9){
+                str.insert(String.valueOf(num).length(), base);
+            }
+            else{
+                str.insert(String.valueOf(num).length(), numberToLetter(base));
+            }
+        }
         return ans;
     }
 
