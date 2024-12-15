@@ -169,6 +169,10 @@ public class Ex1 {
         if((base>16 || base<2) || num<0){
             ans = "";
             }
+        else if(base == 10){
+            numr = (Integer.toString(Integer.parseInt(String.valueOf(num), 10), base)).toUpperCase(Locale.ROOT);
+            str.insert(0, numr);
+        }
         else{
             numr = (Integer.toString(Integer.parseInt(String.valueOf(num), 10), base)).toUpperCase(Locale.ROOT);
             str.insert(0, numr);

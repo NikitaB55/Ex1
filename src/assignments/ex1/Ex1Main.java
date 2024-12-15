@@ -17,14 +17,25 @@ public class Ex1Main {
             num1 = sc.next();
             if (!num1.equals("quit")) {
                 System.out.printf(num1 + " is number: " + Ex1.isNumber(num1) + ", value = " + Ex1.number2Int(num1));
-                System.out.println();
+                System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
                 num2 = sc.next();
                 if (!num2.equals("quit")) {
                     System.out.printf(num2 + " is number: " + Ex1.isNumber(num2) + ", value = " + Ex1.number2Int(num2));
-                    System.out.println();
+                    System.out.println("Enter a string as base: ");
                     base = sc.next();
-                    if (Integer.parseInt(base) > 1 && Integer.parseInt(base) < 17) {
-
+                    if ((Integer.parseInt(base) > 1 && Integer.parseInt(base) < 17) && Integer.parseInt(base) != 10) {
+                        String sum = (Integer.toString(Integer.parseInt(String.valueOf(Ex1.number2Int(num1) + Ex1.number2Int(num2)), 10), Integer.parseInt(base)) + "b" + base);
+                        System.out.println(num1 + " + " + num2 + " = " + sum);
+                        String mul = (Integer.toString(Integer.parseInt(String.valueOf(Ex1.number2Int(num1) * Ex1.number2Int(num2)), 10), Integer.parseInt(base)) + "b" + base);
+                        System.out.println(num1 + " * " + num2 + " = " + mul);
+                        System.out.println("Max number over [" + num1 + "," + num2 + "," + sum + "," + mul);
+                    }
+                    else if (Integer.parseInt(base) == 10) {
+                        String sum = (Integer.toString(Integer.parseInt(String.valueOf(Ex1.number2Int(num1) + Ex1.number2Int(num2)), 10), Integer.parseInt(base)));
+                        System.out.println(num1 + " + " + num2 + " = " + sum);
+                        String mul = (Integer.toString(Integer.parseInt(String.valueOf(Ex1.number2Int(num1) * Ex1.number2Int(num2)), 10), Integer.parseInt(base)));
+                        System.out.println(num1 + " * " + num2 + " = " + mul);
+                        System.out.println("Max number over [" + num1 + "," + num2 + "," + sum + "," + mul);
                     }
                 }
             }

@@ -49,6 +49,7 @@ public class Ex1Test {
         assertTrue(flag);
         assertEquals( "FFbG", Ex1.int2Number(255, 16)); // Decimal to hexadecimal
         assertEquals( "111b2" , Ex1.int2Number(7, 2)); // Decimal to binary
+        assertEquals( "111" , Ex1.int2Number(111, 10)); // Decimal to binary
     }
     @Test
     void maxIndexTest() {
