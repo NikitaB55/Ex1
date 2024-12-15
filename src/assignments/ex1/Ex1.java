@@ -1,4 +1,8 @@
 package assignments.ex1;
+
+import javax.print.attribute.standard.NumberUp;
+import java.util.Locale;
+
 /**
  * This class represents a simple solution for Ex1.
  * As defined here: https://docs.google.com/document/d/1AJ9wtnL1qdEs4DAKqBlO1bXCM6r6GJ_J/r/edit/edit
@@ -166,14 +170,14 @@ public class Ex1 {
             ans = "";
             }
         else{
-            numr = Integer.toString(Integer.parseInt(String.valueOf(num), 10), base);
+            numr = (Integer.toString(Integer.parseInt(String.valueOf(num), 10), base)).toUpperCase(Locale.ROOT);
             str.insert(0, numr);
             str.insert(String.valueOf(numr).length(), 'b');
             if(base<=9){
                 str.insert(String.valueOf(numr).length()+1, base);
             }
             else{
-                str.insert(String.valueOf(numr).length(), numberToLetter(base));
+                str.insert(String.valueOf(numr).length()+1, numberToLetter(base));
             }
         }
         ans = String.valueOf(str);
@@ -187,10 +191,10 @@ public class Ex1 {
      * @return true iff the two numbers have the same values.
      */
     public static boolean equals(String n1, String n2) {
-        boolean ans = true;
-        // add your code here
-
-        ////////////////////
+        boolean ans = false;
+        if(number2Int(n1) == number2Int(n2)){
+            ans = true;
+        }
         return ans;
     }
 
@@ -204,9 +208,13 @@ public class Ex1 {
      */
     public static int maxIndex(String[] arr) {
         int ans = 0;
-        // add your code here
-
-        ////////////////////
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (number2Int(arr[i])>max){
+                max = number2Int(arr[i]);
+                ans = i;
+            }
+        }
         return ans;
     }
 }
