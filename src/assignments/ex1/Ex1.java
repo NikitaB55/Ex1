@@ -22,8 +22,8 @@ public class Ex1 {
 
     public static int number2Int(String num) {
         int ans = -1;
-        if (isNumber(num)) {
-            String[] arra = num.split("b");
+        String[] arra = num.split("b");
+        if (arra.length==2){
             for (char c : arra[1].toCharArray()) {
                 if (c >= '0' && c <= '9') {
                     ans = Integer.parseInt(Integer.toString(Integer.parseInt(arra[0], Integer.parseInt(arra[1])), 10));
@@ -32,6 +32,14 @@ public class Ex1 {
                     ans = Integer.parseInt(Integer.toString(Integer.parseInt(arra[0], letterToNumber(arra[1].charAt(0))), 10));
                     break;
                 }
+            }
+        }
+        else if (arra.length==1) {
+            if (arra[0].charAt(0) >= '0' && arra[0].charAt(0) <= '9') {
+                ans = Integer.parseInt(Integer.toString(Integer.parseInt(arra[0], 10), 10));
+            }
+            else if(arra[0].charAt(0) >= 'A' && arra[0].charAt(0) <= 'G'){
+                ans = Integer.parseInt(Integer.toString(Integer.parseInt(String.valueOf(letterToNumber(arra[0].charAt(0))), 10), 10));
             }
         }
         return ans;
@@ -128,13 +136,13 @@ public class Ex1 {
                 ans = false;
             }
         }
-        if(arra.length == 2 && isNumericArray(arra[0]) && isNumericArray(arra[1])) {
+        if((arra.length == 2) && (isNumericArray(arra[0]) && isNumericArray(arra[1]))) {
             if ((basis(a) <= max(a)) || (basis(a)<=1 || basis(a)>=17)) {
                 ans = false;
             }
         }
         else if(arra.length == 1 && isNumericArray(arra[0])){
-            if(number2Int(arra[0]) > 9){
+            if(!Character.isDigit(a.charAt(0))){
                 ans = false;
             }
         }
@@ -151,22 +159,24 @@ public class Ex1 {
      */
     public static String int2Number(int num, int base) {
         String ans = "";
+        String numr = "";
         int i = 0;
         StringBuilder str = new StringBuilder();
         if((base>16 || base<2) || num<0){
             ans = "";
             }
         else{
-            Integer.toString(Integer.parseInt(String.valueOf(num), 10), base);
-            str.insert(0, num);
-            str.insert(String.valueOf(num).length()-1, 'b');
+            numr = Integer.toString(Integer.parseInt(String.valueOf(num), 10), base);
+            str.insert(0, numr);
+            str.insert(String.valueOf(numr).length(), 'b');
             if(base<=9){
-                str.insert(String.valueOf(num).length(), base);
+                str.insert(String.valueOf(numr).length()+1, base);
             }
             else{
-                str.insert(String.valueOf(num).length(), numberToLetter(base));
+                str.insert(String.valueOf(numr).length(), numberToLetter(base));
             }
         }
+        ans = String.valueOf(str);
         return ans;
     }
 

@@ -36,7 +36,15 @@ public class Ex1Test {
     }
     @Test
     void int2NumberTest() {
-        // implement this testtt
+        String[] good = {"1", "0", "123", "123bA", "ABbG", "0bA"};
+        for(int i=0;i<good.length;i=i+1) {
+
+        }
+        String[] not_good = {"b2", "2b2", "1G3bG", " BbG", "0bbA", "abB", "!@b2", "A", "1bb2"};
+        for(int i=0;i<not_good.length;i=i+1) {
+            boolean not_ok = assignments.ex1.Ex1.isNumber(not_good[i]);
+            assertFalse(not_ok);
+        }
     }
     @Test
     void maxIndexTest() {
