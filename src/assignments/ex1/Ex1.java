@@ -27,94 +27,92 @@ public class Ex1 {
     public static int number2Int(String num) {
         int ans = -1;
         String[] arra = num.split("b");
-        if (arra.length==2){
+        if (arra.length == 2) {
             for (char c : arra[1].toCharArray()) {
                 if (c >= '0' && c <= '9') {
+                    // Converts the number in the given base to an integer
                     ans = Integer.parseInt(Integer.toString(Integer.parseInt(arra[0], Integer.parseInt(arra[1])), 10));
                     break;
                 } else if ((letterToNumber(c) >= 10 && letterToNumber(c) <= 16)) {
+                    // Converts the number using the base given by the second part of the string
                     ans = Integer.parseInt(Integer.toString(Integer.parseInt(arra[0], letterToNumber(arra[1].charAt(0))), 10));
                     break;
                 }
             }
-        }
-        else if (arra.length==1) {
+        } else if (arra.length == 1) {
             if (arra[0].charAt(0) >= '0' && arra[0].charAt(0) <= '9') {
+                // Converts from base 10 to integer
                 ans = Integer.parseInt(Integer.toString(Integer.parseInt(arra[0], 10), 10));
             }
-            else if(arra[0].charAt(0) >= 'A' && arra[0].charAt(0) <= 'G'){
+            else if (arra[0].charAt(0) >= 'A' && arra[0].charAt(0) <= 'G') {
+                // Converts letter (A-G) to corresponding integer value
                 ans = Integer.parseInt(Integer.toString(Integer.parseInt(String.valueOf(letterToNumber(arra[0].charAt(0))), 10), 10));
             }
         }
         return ans;
     }
+
     public static int basis(String a) {
+        // Extracts the base (after 'b') from the string and returns its integer representation
         String[] arra = a.split("b");
         return number2Int(arra[1]);
     }
+
     public static int max(String a) {
         int max = -1;
         String[] arra = a.split("b");
         for (int i = 0; i < arra[0].length(); i++) {
-            if(number2Int(String.valueOf(arra[0].charAt(i))) > max){
+            // Finds the maximum numeric value among the characters in the string
+            if (number2Int(String.valueOf(arra[0].charAt(i))) > max) {
                 max = number2Int(String.valueOf(arra[0].charAt(i)));
             }
         }
         return max;
     }
+
     public static int letterToNumber(char letter) {
+        // Converts a letter (A-G) to its corresponding numeric value (10-16)
         switch (letter) {
-            case 'A':
-                return 10;
-            case 'B':
-                return 11;
-            case 'C':
-                return 12;
-            case 'D':
-                return 13;
-            case 'E':
-                return 14;
-            case 'F':
-                return 15;
-            case 'G':
-                return 16;
-            default:
-                // Return -1 for invalid input
+            case 'A': return 10;
+            case 'B': return 11;
+            case 'C': return 12;
+            case 'D': return 13;
+            case 'E': return 14;
+            case 'F': return 15;
+            case 'G': return 16;
+            default: // Return -1 for invalid input
                 return -1;
         }
     }
+
     public static char numberToLetter(int num) {
+        // Converts a number (10-16) to its corresponding letter (A-G)
         switch (num) {
-            case 10:
-                return 'A';
-            case 11:
-                return 'B';
-            case 12:
-                return 'C';
-            case 13:
-                return 'D';
-            case 14:
-                return 'E';
-            case 15:
-                return 'F';
-            case 16:
-                return 'G';
-            default:
-                // Return X for invalid input
+            case 10: return 'A';
+            case 11: return 'B';
+            case 12: return 'C';
+            case 13: return 'D';
+            case 14: return 'E';
+            case 15: return 'F';
+            case 16: return 'G';
+            default: // Return 'X' for invalid input
                 return 'X';
         }
     }
+
     public static boolean isNumericArray(String str) {
         if (str == null)
             return false;
         if (str.isEmpty())
             return false;
+        // Checks if the string consists only of valid characters (0-9 or A-G)
         for (char c : str.toCharArray())
-            if ((c < '0' || c > '9') && (c < 'A' || c > 'G') || String.valueOf('c').isEmpty() ) {
+            if ((c < '0' || c > '9') && (c < 'A' || c > 'G') || String.valueOf('c').isEmpty()) {
                 return false;
             }
         return true;
     }
+
     /**
      * This static function checks if the given String (g) is in a valid "number" format.
      * @param a a String representing a number
@@ -122,31 +120,30 @@ public class Ex1 {
      */
     public static boolean isNumber(String a) {
         boolean ans = true;
-        int sumb=0;
+        int sumb = 0;
         for (int i = 0; i < a.length(); i++) {
-            if(a.charAt(i) == 'b'){
-                sumb=sumb+1;
+            if (a.charAt(i) == 'b') {
+                sumb = sumb + 1;
             }
         }
-        if(sumb!=1 && sumb!=0){
+        if (sumb != 1 && sumb != 0) {
             ans = false;
         }
-        if(sumb==0 && !isNumericArray(a)){
+        if (sumb == 0 && !isNumericArray(a)) {
             ans = false;
         }
         String[] arra = a.split("b");
-        if(arra.length ==2){
-            if(!isNumericArray(arra[0]) || !isNumericArray(arra[1])) {
+        if (arra.length == 2) {
+            if (!isNumericArray(arra[0]) || !isNumericArray(arra[1])) {
                 ans = false;
             }
         }
-        if((arra.length == 2) && (isNumericArray(arra[0]) && isNumericArray(arra[1]))) {
-            if ((basis(a) <= max(a)) || (basis(a)<=1 || basis(a)>=17)) {
+        if ((arra.length == 2) && (isNumericArray(arra[0]) && isNumericArray(arra[1]))) {
+            if ((basis(a) <= max(a)) || (basis(a) <= 1 || basis(a) >= 17)) {
                 ans = false;
             }
-        }
-        else if(arra.length == 1 && isNumericArray(arra[0])){
-            if(!Character.isDigit(a.charAt(0))){
+        } else if (arra.length == 1 && isNumericArray(arra[0])) {
+            if (!Character.isDigit(a.charAt(0))) {
                 ans = false;
             }
         }
@@ -166,22 +163,21 @@ public class Ex1 {
         String numr = "";
         int i = 0;
         StringBuilder str = new StringBuilder();
-        if((base>16 || base<2) || num<0){
+        if ((base > 16 || base < 2) || num < 0) {
             ans = "";
-            }
-        else if(base == 10){
+        } else if (base == 10) {
+            // Converts the number to a string in base 10
             numr = (Integer.toString(Integer.parseInt(String.valueOf(num), 10), base)).toUpperCase(Locale.ROOT);
             str.insert(0, numr);
-        }
-        else{
+        } else {
+            // Converts the number to a string in a given base (2-16)
             numr = (Integer.toString(Integer.parseInt(String.valueOf(num), 10), base)).toUpperCase(Locale.ROOT);
             str.insert(0, numr);
             str.insert(String.valueOf(numr).length(), 'b');
-            if(base<=9){
-                str.insert(String.valueOf(numr).length()+1, base);
-            }
-            else{
-                str.insert(String.valueOf(numr).length()+1, numberToLetter(base));
+            if (base <= 9) {
+                str.insert(String.valueOf(numr).length() + 1, base);
+            } else {
+                str.insert(String.valueOf(numr).length() + 1, numberToLetter(base));
             }
         }
         ans = String.valueOf(str);
@@ -196,25 +192,25 @@ public class Ex1 {
      */
     public static boolean equals(String n1, String n2) {
         boolean ans = false;
-        if(number2Int(n1) == number2Int(n2)){
+        if (number2Int(n1) == number2Int(n2)) {
             ans = true;
         }
         return ans;
     }
 
     /**
-     * This static function search for the array index with the largest number (in value).
+     * This static function searches for the array index with the largest number (in value).
      * In case there are more than one maximum - returns the first index.
-     * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
+     * Note: you can assume that the array is not null and is not empty, yet it may contain null or non-valid numbers (with value -1).
      * @param arr an array of numbers
-     * @return the index in the array in with the largest number (in value).
-     *
+     * @return the index in the array with the largest number (in value).
      */
     public static int maxIndex(String[] arr) {
         int ans = 0;
         int max = 0;
         for (int i = 0; i < arr.length; i++) {
-            if (number2Int(arr[i])>max){
+            // Finds the index of the element with the largest value
+            if (number2Int(arr[i]) > max) {
                 max = number2Int(arr[i]);
                 ans = i;
             }
