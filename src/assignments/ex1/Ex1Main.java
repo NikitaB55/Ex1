@@ -1,4 +1,5 @@
 package assignments.ex1;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -28,14 +29,16 @@ public class Ex1Main {
                         System.out.println(num1 + " + " + num2 + " = " + sum);
                         String mul = (Integer.toString(Integer.parseInt(String.valueOf(Ex1.number2Int(num1) * Ex1.number2Int(num2)), 10), Integer.parseInt(base)) + "b" + base);
                         System.out.println(num1 + " * " + num2 + " = " + mul);
-                        System.out.println("Max number over [" + num1 + "," + num2 + "," + sum + "," + mul);
+                        String[] arr1 = {num1, num2, sum, mul};
+                        System.out.println("Max number over [" + num1 + "," + num2 + "," + sum + "," + mul + "] is: " + arr1[Ex1.maxIndex(arr1)]);
                     }
                     else if (Integer.parseInt(base) == 10) {
                         String sum = (Integer.toString(Integer.parseInt(String.valueOf(Ex1.number2Int(num1) + Ex1.number2Int(num2)), 10), Integer.parseInt(base)));
                         System.out.println(num1 + " + " + num2 + " = " + sum);
                         String mul = (Integer.toString(Integer.parseInt(String.valueOf(Ex1.number2Int(num1) * Ex1.number2Int(num2)), 10), Integer.parseInt(base)));
                         System.out.println(num1 + " * " + num2 + " = " + mul);
-                        System.out.println("Max number over [" + num1 + "," + num2 + "," + sum + "," + mul);
+                        String[] arr2 = {num1, num2, sum, mul};
+                        System.out.println("Max number over [" + num1 + "," + num2 + "," + sum + "," + mul + "] is: " + arr2[Ex1.maxIndex(arr2)]);
                     }
                 }
             }
